@@ -10,7 +10,7 @@ node('linux') {
 	}   
 	
 	stage('Deploy'){
-		sh 'aws cp s3:/workspace/my-java-pipeline-assignment/dist/*.jar s3://hemw10/'
+		sh 'aws s3 cp /workspace/my-java-pipeline-assignment/dist/*.jar s3://hemw10/'
 	}
 	stage('Results') {    
 		junit 'reports/result.xml'   
