@@ -16,8 +16,5 @@ node('linux') {
 	stage('Results') {    
 		junit 'reports/result.xml'   
 	} 
-	stage ('Test'){  
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: '99073a5c-1cd5-48fb-9bd4-72ef5a20d95a', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
-	        sh 'aws cloudformation describe-stack-resources --stack-name jenkins --region us-east-1'         
-        }
+	
 }
