@@ -2,13 +2,18 @@ properties([pipelineTriggers([githubPush()])])
 
 node('linux') {   
 	stage('Test') {    
-		
-		sh 'ant -buildfile test.xml'   
+		sh 'ant -f test.xml -v'
+		junit 'reports/result.xml' 
 	}   
 	stage('Build') {    
-		sh 'ant'   
+		sh 'ant -f build.xml -v'   
 	}   
-	stage('Results') {    
-		junit 'reports/*.xml' 
+	
+	stage('Deploy'){
+		sh 'aws s3 cp /workspace/my-java-pipeline-assignment/dist/*.jar s3://hemw10/'
 	}
+	stage('Results') {    
+		junit 'reports/result.xml'   
+	} 
+	
 }
