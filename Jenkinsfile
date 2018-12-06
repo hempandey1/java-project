@@ -9,6 +9,6 @@ node('linux') {
 		sh 'ant'   
 	}   
 	stage('Results') {    
-		junit 'reports/*.xml'   
+		junit 'reports/*.xml' 
 	}
 }
